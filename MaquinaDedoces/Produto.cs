@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,57 +36,60 @@ namespace MaquinaDedoces
 
         } // fim do metodo constutor 
 
-    
+
         public Produto(int codigo, string nome, string descricao, double preco,
             int quantidade, DateTime dtValidade, Boolean situacao)
         {
             ModificarCodigo = codigo;
             ModificarNome = nome;
             ModificarDescricao = descricao;
-        ModificarDataValidade= dtValidade;
-        ModificarSituacao  = situacao;
-   
-    }//fim do metodo construtor com parametro
+            ModificarDataValidade = dtValidade;
+            ModificarSituacao = situacao;
 
-    //metodos get set
-    //metodo de acesso e modificacao
-    public int modificarcodigo
+
+
+
+        }//fim do metodo construtor com parametro
+
+        //metodos get set
+        //metodo de acesso e modificacao
+        public int modificarcodigo
         {
             get { return codigo; }
             set { codigo = value; }
-               
-           
-            
-      }//fim do get - retornar codigo
 
-           
-            
-           
-      
-        
-       public string MdificarNome
+
+
+        }//fim do get - retornar codigo
+
+
+
+
+
+
+        public string MdificarNome
         {
 
-            get { return nome; }    
+            get { return nome; }
             set { nome = value; }
-             
-        
-        
-       
-        
+
+
+
+
+
         }
-    
-        
-        public  double Modificarpreco
+
+
+        public double Modificarpreco
         {
-            get { return preco; }   
+            get { return preco; }
             set { preco = value; }
 
-            
+
 
         }
-    
-    
+
+
         public int ModificarQuantidade
         {
             get { return this.quantidade; }
@@ -94,14 +99,14 @@ namespace MaquinaDedoces
         }
 
 
-        public  int modificardtvalidade
-        { 
-            get { return this.dtValidade;}
+        public int modificarDataValidade
+        {
+            get { return this.modificarDataValidade; }
             set { this.dtValidade = value; }
-        
-        
-        
-        
+
+
+
+
         }
 
         //metodo cadastrar produto
@@ -113,16 +118,16 @@ namespace MaquinaDedoces
             int quantidade,
             DateTime dtValidade,
             Boolean situacao
-            
+
             )
         {
-            modificarcodigo =codigo;
-           
+            modificarcodigo = codigo;
+
             ModificarDescricao = descricao;
             Modificarpreco = preco;
-            ModificarQuantidade= quantidade;
+            ModificarQuantidade = quantidade;
             ModificarDataValidade = dtValidade;
-            ModificarSituacao  = situacao;
+            ModificarSituacao = situacao;
 
         }//fim do metodo cadastrarprodutos
 
@@ -132,27 +137,108 @@ namespace MaquinaDedoces
         {
 
             string msg = "";//criando uma variavel local
-            if(modificarcodigo == codigo)
+            if (modificarcodigo == codigo)
             {
 
                 msg = "codigo: " + modificarcodigo +
                     "/nNome: " + modificarNome +
                     "/nNdescricao: " + ModificarDescricao +
-                   "/nPreco: "+modificarpreco +
+                   "/nPreco: " + modificarpreco +
                     "/nQuantidade: "modificarQuantidade +
                     "/nData de validade: "  modificardtvalidade +
                     "/nSituacao: "  modificarSituacao;
-            {  
+                {
             else
                     {
                         msg = " o codigo digitado nao existe!";
 
                     }
-        }//fim do metodo
+                    return msg;
+                }//fim do metodo
 
 
 
+                public AtualizarProduto(int codigo, string campo, string
+               {
+                    if (modificarcodigo == codigo)
+                    {
+                        switch (campo)
+                        {
+                            case 1:
+                                modificarnome = novoDado;
+                                break;
 
+                            case 2:
+                                ModificarDescricao = NovoDado;
+                                break;
+                            case 3:
+                                Modificarpreco = Convert.ToDouble(novoDado);
+                                break;
+
+                            case 4:
+                                ModificarQuantidade = Convert.ToInt32(novoDado);
+                                break;
+                            case 5
+                                modificarValidade = Convert.ToDateTime(novoDado);
+                                break;
+                            case 6
+                                modificarSituacao = Convert.ToBoolean(novoDado);
+                                break;
+                            default:
+                                break;
+
+
+
+                        }//fim escolha
+                        return flag;
+
+
+
+                    }//fim do atualizarProduto
+
+
+                    public void desativarProduto(int codigo)
+
+                    {
+                        Boolean flag = false;
+                        if (modificarcodigo == codigo)
+                        {
+                            if (modificarSituacao == true)
+                            {
+                                modificarSituacao = false;
+
+
+                            }
+                            else
+                            {
+                                Modificacao = true;
+                            }//fim do modificarSituacao
+                            flag = true;
+
+
+                        }
+
+
+
+                    }//fim do desativar codigo
+
+                    //solicitar produtos
+                    public Boolean SolicitarProduto()
+                    {
+                       if (modificarcodigo == codigo)
+                        { 
+                               
+                        
+                        if(ModificarQuantidade <= 3)
+                        {
+                            return false;
+
+
+                        }// fim do if
+
+                    }//fim do solicitar produto
+
+            
 
 
     }// fim da classe 
